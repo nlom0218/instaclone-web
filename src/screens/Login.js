@@ -1,11 +1,18 @@
 import React from 'react';
-import { isLoggedInVar } from './apllo';
+import { useState } from 'react';
+import styled, { css } from 'styled-components';
+import { darkModeVar, isLoggedInVar } from '../apllo';
+
+const Title = styled.h1`
+    color: ${(props) => props.theme.fontColor};
+`
+const Container = styled.div`
+`
 
 const Login = () => {
-    return (<>
-        <h1>Login</h1>
-        <button onClick={() => isLoggedInVar(true)}>Log in Now!</button>
-    </>);
+    return (<Container>
+        <Title>Login</Title>
+    </Container>);
 }
 
 export default Login;

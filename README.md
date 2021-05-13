@@ -3,4 +3,6 @@
 - [x] Router
 - [x] Authentication
 - [x] Arch
-- [ ] Styles
+- [x] Styles
+
+- [ ] Log In / Sign Up

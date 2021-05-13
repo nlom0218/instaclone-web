@@ -1,5 +1,5 @@
 import React from 'react';
-import { isLoggedInVar } from './apllo';
+import { isLoggedInVar } from '../apllo';
 
 const Home = () => {
     return (<>
