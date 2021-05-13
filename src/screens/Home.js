@@ -1,9 +1,10 @@
 import React from 'react';
+import { isLoggedInVar } from './apllo';
 
-const Home = ({ setIsLoggedIn }) => {
+const Home = () => {
     return (<>
         <h1>Home</h1>
-        <button onClick={() => setIsLoggedIn(false)}>Log Out Now!</button>
+        <button onClick={() => isLoggedInVar(false)}>Log out Now!</button>
     </>);
 }
 
