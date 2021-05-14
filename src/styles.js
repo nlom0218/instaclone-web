@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import reset from "styled-reset"
 
 export const lightTheme = {
@@ -12,7 +12,23 @@ export const darkTheme = {
 
 export const GlobalStyles = createGlobalStyle`
     ${reset}
-    body  {
-        background-color: ${(props) => props.theme.bgColor};
+    * {
+        box-sizing: border-box;
     }
+    input {
+        all: unset;
+    }
+    body  {
+        background-color: white;
+        font-size: 14px;
+        font-family: "Open Sans", sans-serif;
+    }
+    a {
+        text-decoration: none;
+    }
+`
+export const WhiteBox = styled.div`
+    background-color: white;
+    border: 1px solid rgb(219, 219, 219);
+    width: 100%;
 `
