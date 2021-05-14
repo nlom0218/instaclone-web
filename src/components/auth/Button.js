@@ -9,6 +9,7 @@ const Button = styled.input`
     text-align: center;
     padding: 8px 0px;
     font-weight: 600;
+    cursor: pointer;
 `
 
 export default Button;
