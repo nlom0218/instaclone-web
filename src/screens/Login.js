@@ -3,87 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { WhiteBox } from "../styles"
+import AuthLayout from '../components/auth/AuthLayout';
+import BottomBox from '../components/auth/BottomBox';
+import Button from '../components/auth/Button';
+import FormBox from '../components/auth/FormBox';
+import Input from '../components/auth/Input';
+import Separator from '../components/auth/Separator';
+import routes from '../routes';
 
-const Container = styled.div`
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-`
-
-const TopBox = styled(WhiteBox)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 35px 40px 25px 40px;
-    margin-bottom: 10px;
-    form {
-        margin-top: 35px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        input {
-            width: 100%;
-            padding: 7px;
-            background-color: #fafafa;
-            border: 0.5px solid rgb(219, 219, 219);
-            border-radius: 3px;
-            margin-top: 5px;
-            box-sizing: border-box;
-            &::placeholder {
-                font-size: 12px;
-            }
-            &:last-child {
-                border: none;
-                margin-top: 12px;
-                background-color: #0095f6;
-                color: white;
-                text-align: center;
-                padding: 8px 0px;
-                font-weight: 600;
-            }
-        }
-    }
-`
-
-const BottomBox = styled(WhiteBox)`
-    padding: 20px 0px;
-    text-align: center;
-    a{
-        margin-left: 10px;
-        font-weight: 600;
-        color: #0095f6;
-    }
-`
-
-const Wrapper = styled.div`
-    max-width: 350px;
-    width: 100%;
-`
-
-const Separator = styled.div`
-    margin: 20px 0px 30px 0px;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    div {
-        width: 100%;
-        height: 1px;
-        background-color: rgb(219, 219, 219);
-    }
-    span {
-        margin: 0px 10px;
-        font-weight: 600;
-        color: #8e8e8e;
-    }
-`
 const FacebookLogin = styled.div`
     color: #385285;
     span {
@@ -93,31 +20,28 @@ const FacebookLogin = styled.div`
 `
 
 const Login = () => {
-    return (<Container>
-        <Wrapper>
-            <TopBox>
+    return (
+        <AuthLayout>
+            <FormBox>
                 <div><FontAwesomeIcon icon={faInstagram} size="3x" /></div>
                 <form>
-                    <input type="text" placeholder="Username" />
-                    <input type="password" placeholder="Password" />
-                    <input type="submit" value="Log in" />
+                    <Input type="text" placeholder="Username" />
+                    <Input type="password" placeholder="Password" />
+                    <Button type="submit" value="Log in" />
                 </form>
-                <Separator>
-                    <div></div>
-                    <span>Or</span>
-                    <div></div>
-                </Separator>
+                <Separator />
                 <FacebookLogin>
                     <FontAwesomeIcon icon={faFacebookSquare} />
                     <span>Log in with Facebook</span>
                 </FacebookLogin>
-            </TopBox>
-            <BottomBox>
-                <span>Don't have an account?</span>
-                <Link to="#">Sign up</Link>
-            </BottomBox>
-        </Wrapper>
-    </Container>);
+            </FormBox>
+            <BottomBox
+                cta="Don't have an account?"
+                link={routes.signUp}
+                linkText="Sign Up"
+            />
+        </AuthLayout>
+    );
 }
 
 export default Login;
