@@ -14,6 +14,8 @@ import Separator from '../components/auth/Separator';
 import PageTitle from '../components/PageTitle';
 import routes from '../routes';
 import { logUserIn } from '../apllo';
+import { useLocation } from 'react-router-dom';
+import Notification from '../components/auth/Notification';
 
 const FacebookLogin = styled.div`
     color: #385285;
@@ -34,7 +36,14 @@ const LOGIN_MUTATION = gql`
 `
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors, isValid }, getValues, setError, clearErrors, trigger } = useForm({ mode: "onChange" })
+    const location = useLocation()
+    const { register, handleSubmit, formState: { errors, isValid }, getValues, setError, clearErrors, trigger } = useForm({
+        mode: "onChange",
+        defaultValues: {
+            username: location?.state?.username || "",
+            password: location?.state?.password || ""
+        }
+    })
     const onCompleted = (data) => {
         const { login: { ok, error, token } } = data
         if (!ok) {
@@ -66,6 +75,7 @@ const Login = () => {
             <PageTitle title="Log In" />
             <FormBox>
                 <div><FontAwesomeIcon icon={faInstagram} size="3x" /></div>
+                <Notification message={location?.state?.message} />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         {...register("username", {

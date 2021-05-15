@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import gql from 'graphql-tag';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
@@ -52,17 +52,22 @@ const CREATE_ACCOUNT_MUTATION = gql`
 
 
 const SignUp = () => {
-  const { register, handleSubmit, formState: { errors, isValid }, setError, clearErrors, trigger } = useForm({ mode: "onChange" })
+  const { register, handleSubmit, formState: { errors, isValid }, setError, clearErrors, trigger, getValues } = useForm({ mode: "onChange" })
   const history = useHistory()
   const onCompleted = (data) => {
     const { createAccount: { ok, error } } = data
+    const { username, password } = getValues()
     if (!ok) {
       setError("result", {
         message: error
       })
       return
     }
-    history.push(routes.home)
+    history.push(routes.home, {
+      message: "Account created. Please log in.",
+      username,
+      password
+    })
   }
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, { onCompleted })
 
