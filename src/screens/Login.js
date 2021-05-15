@@ -18,7 +18,7 @@ import { useLocation } from 'react-router-dom';
 import Notification from '../components/auth/Notification';
 
 const FacebookLogin = styled.div`
-    color: #385285;
+    color: ${props => props.theme.facebookFontColor};
     span {
         margin-left: 10px;
         font-weight: 600;
