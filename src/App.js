@@ -1,5 +1,5 @@
 import { useReactiveVar } from "@apollo/client";
-import { HashRouter as Router, Route, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { ThemeProvider } from "styled-components";
 import routes from "./routes";
 import { darkModeVar, isLoggedInVar } from "./apllo";
