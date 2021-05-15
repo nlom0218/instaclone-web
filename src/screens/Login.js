@@ -34,7 +34,6 @@ const LOGIN_MUTATION = gql`
 `
 
 const Login = () => {
-
     const { register, handleSubmit, formState: { errors, isValid }, getValues, setError, clearErrors, trigger } = useForm({ mode: "onChange" })
     const onCompleted = (data) => {
         const { login: { ok, error, token } } = data
@@ -55,7 +54,7 @@ const Login = () => {
         })
     };
 
-    const clearLoginError = () => {
+    const clearLoginAndSignError = () => {
         if (errors.result) {
             clearErrors("result")
             trigger()
@@ -75,7 +74,7 @@ const Login = () => {
                                 value: 5,
                                 message: "Username should be longer than 5 chars."
                             },
-                            validate: clearLoginError
+                            validate: clearLoginAndSignError
                         })}
                         type="text"
                         placeholder="Username"
@@ -86,7 +85,7 @@ const Login = () => {
                     <Input
                         {...register("password", {
                             required: "Password is required",
-                            validate: clearLoginError
+                            validate: clearLoginAndSignError
                         })}
                         type="password"
                         placeholder="Password"
