@@ -7,7 +7,8 @@ export const lightTheme = {
     fontColor: "rgb(38,38,38)",
     bgColor: "#FAFAFA",
     facebookFontColor: "#385285",
-    inputFocusBorderColor: "rgb(38, 38, 38)"
+    inputFocusBorderColor: "rgb(38, 38, 38)",
+    photoContainerBgColor: "white"
 }
 export const darkTheme = {
     borderColor: "#323232",
@@ -15,7 +16,8 @@ export const darkTheme = {
     fontColor: "#e2e2e2",
     bgColor: "#1C1C1C",
     facebookFontColor: "#497CC7",
-    inputFocusBorderColor: "#FCFCFC"
+    inputFocusBorderColor: "#FCFCFC",
+    photoContainerBgColor: "black"
 }
 
 export const GlobalStyles = createGlobalStyle`
