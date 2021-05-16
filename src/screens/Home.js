@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { faBookmark, faComment, faHeart, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import gql from 'graphql-tag';
 import React from 'react';
@@ -22,8 +23,16 @@ const FEED_QUERY = gql`
             comments
             createdAt
             isMine
+            isLiked
         }
     }
+`
+
+const Container = styled.div`
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
 `
 
 const PhotoContainer = styled.div`
@@ -31,12 +40,14 @@ const PhotoContainer = styled.div`
     border: 1px solid ${props => props.theme.borderColor};
     margin-bottom: 20px;
     max-width: 615px;
+    border-radius: 5px;
 `
 
 const PhotoHeader = styled.div`
     padding: 15px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid ${props => props.theme.borderColor};
 `
 
 const Username = styled(FatText)`
@@ -45,6 +56,7 @@ const Username = styled(FatText)`
 
 const PhotoFile = styled.img`
     width: 100%;
+    height: 450px;
 `
 
 const PhotoData = styled.div`
@@ -58,6 +70,9 @@ const PhotoActions = styled.div`
     div {
         display: flex;
         align-items: center;
+    }
+    svg {
+        font-size: 20px
     }
 `
 
@@ -73,7 +88,7 @@ const Likes = styled(FatText)`
 const Home = () => {
     const history = useHistory()
     const { data } = useQuery(FEED_QUERY)
-    return (<>
+    return (<Container>
         {data?.seeFeed?.map(photo =>
             <PhotoContainer key={photo.id}>
                 <PhotoHeader>
@@ -84,8 +99,9 @@ const Home = () => {
                 <PhotoData>
                     <PhotoActions>
                         <div>
-                            <PhotoAction>
-                                <FontAwesomeIcon size={"2x"} icon={faHeart} />
+                            <PhotoAction
+                                style={{ color: photo.isLiked ? "tomato" : "inherit" }}>
+                                <FontAwesomeIcon size={"2x"} icon={photo.isLiked ? SolidHeart : faHeart} />
                             </PhotoAction>
                             <PhotoAction>
                                 <FontAwesomeIcon size={"2x"} icon={faComment} />
@@ -101,7 +117,7 @@ const Home = () => {
                     <Likes>{photo.likes === 1 ? "1 like" : `${photo.likes} likes`}</Likes>
                 </PhotoData>
             </PhotoContainer>)}
-    </>);
+    </Container>);
 }
 
 export default Home;
