@@ -5,6 +5,7 @@ const TOKEN = "TOKEN"
 const DARK_MODE = "DARK_MODE"
 
 export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)))
+
 export const logUserIn = (token) => {
   localStorage.setItem(TOKEN, token)
   isLoggedInVar(true)
@@ -26,11 +27,10 @@ export const disableDarkMode = () => {
 }
 
 const httpLink = createHttpLink({
-  uri: " http://localhost:4000/graphql",
+  uri: "http://localhost:4000/graphql",
 })
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem(TOKEN)
-  console.log(token);
   return {
     headers: {
       ...headers,
