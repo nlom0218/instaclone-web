@@ -71,8 +71,46 @@ const Likes = styled(FatText)`
 `
 
 const Photo = ({ id, user, file, isLiked, likes }) => {
-  const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
+  const updateToggleLike = (cache, result) => {
+    const { data: { toggleLike: { ok } } } = result
+    if (ok) {
+      const fragmentId = `Photo:${id}`
+      const fragment = gql`
+      fragment BSName on Photo {
+        isLiked
+        likes
+      }
+    `
+      // readFragment 사용하여 cache를 읽고 write하기 (props에 원하는 정보가 없을 때 사용하기 좋다)
+      // const result = cache.readFragment({
+      //   id: fragmentId,
+      //   fragment,
+      // })
+      // console.log(result);
+      // if ("isLiked" in result && "likes" in result) {
+      //   const { isLiked, likes } = result
+      //   cache.writeFragment({
+      //     id: fragmentId,
+      //     fragment: fragment,
+      //     data: {
+      //       isLiked: !isLiked,
+      //       likes: isLiked ? likes - 1 : likes + 1
+      //     }
+      //   })
+      // }
+      cache.writeFragment({
+        id: fragmentId,
+        fragment: fragment,
+        data: {
+          isLiked: !isLiked,
+          likes: isLiked ? likes - 1 : likes + 1
+        }
+      })
+    }
+  }
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
     variables: { id },
+    update: updateToggleLike
   })
   return (<PhotoContainer key={id}>
     <PhotoHeader>
