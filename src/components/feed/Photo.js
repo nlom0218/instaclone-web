@@ -74,13 +74,29 @@ const Photo = ({ id, user, file, isLiked, likes, caption, commentNumber, comment
   const updateToggleLike = (cache, result) => {
     const { data: { toggleLike: { ok } } } = result
     if (ok) {
-      const fragmentId = `Photo:${id}`
-      const fragment = gql`
-      fragment BSName on Photo {
-        isLiked
-        likes
-      }
-    `
+      const photoId = `Photo:${id}`
+
+      cache.modify({
+        id: photoId,
+        fields: {
+          isLiked(prev) {
+            return !prev
+          },
+          likes(prev) {
+            if (isLiked) {
+              return prev - 1
+            }
+            return prev + 1
+          }
+        }
+      })
+
+      //   const fragment = gql`
+      //   fragment BSName on Photo {
+      //     isLiked
+      //     likes
+      //   }
+      // `
       // readFragment 사용하여 cache를 읽고 write하기 (props에 원하는 정보가 없을 때 사용하기 좋다)
       // const result = cache.readFragment({
       //   id: fragmentId,
@@ -98,14 +114,16 @@ const Photo = ({ id, user, file, isLiked, likes, caption, commentNumber, comment
       //     }
       //   })
       // }
-      cache.writeFragment({
-        id: fragmentId,
-        fragment: fragment,
-        data: {
-          isLiked: !isLiked,
-          likes: isLiked ? likes - 1 : likes + 1
-        }
-      })
+
+      // props에 원하는 정보가 있으면 굳이 cache를 읽을 필요가 없다.
+      // cache.writeFragment({
+      //   id: fragmentId,
+      //   fragment: fragment,
+      //   data: {
+      //     isLiked: !isLiked,
+      //     likes: isLiked ? likes - 1 : likes + 1
+      //   }
+      // })
     }
   }
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {

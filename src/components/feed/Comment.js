@@ -21,9 +21,6 @@ const CommentCaption = styled.span`
 `
 
 const Comment = ({ author, payload }) => {
-  const cleanedPayload = sanitizeHtml(payload.replace(/#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]+/g, "<mark>$&</mark>"), {
-    allowedTags: ["mark"]
-  })
   return (<CommentContainer>
     <FatText>{author}</FatText>
     <CommentCaption>
