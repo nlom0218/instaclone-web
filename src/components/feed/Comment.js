@@ -6,7 +6,7 @@ import sanitizeHtml from "sanitize-html"
 import { Link } from 'react-router-dom';
 
 const CommentContainer = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 `
 const CommentCaption = styled.span`
   margin-left: 10px;
