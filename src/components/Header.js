@@ -58,7 +58,9 @@ const Header = () => {
       <Column>
         {isLoggedIn ? (<IconsContainer>
           <Icon>
-            <FontAwesomeIcon icon={faHome} size="lg" />
+            <Link to={routes.home}>
+              <FontAwesomeIcon icon={faHome} size="lg" />
+            </Link>
           </Icon>
           <Icon>
             <FontAwesomeIcon icon={faCompass} size="lg" />

@@ -25,7 +25,7 @@ function App() {
             <Switch>
               <Route exact path={routes.home}>{isLoggedIn ? <Layout><Home /></Layout> : <Login />}</Route>
               {!isLoggedIn && <Route path={routes.signUp}><SignUp /></Route>}
-              <Route path={`/users/:username`}><Profile /></Route>
+              <Route path={`/users/:username`}><Layout><Profile /></Layout></Route>
               <Route><NotFound /></Route>
             </Switch>
           </Router>

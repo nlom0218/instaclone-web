@@ -48,7 +48,6 @@ const PostCommentInput = styled.input`
 const Comments = ({ caption, commentNumber, comments, author, photoId }) => {
   const { data: userData } = useUser()
   const createCommentUpdate = (cache, result) => {
-    console.log(result.data);
     const { data: { createComment: { ok, id } } } = result
     const { payload } = getValues()
     setValue("payload", "")
@@ -78,7 +77,6 @@ const Comments = ({ caption, commentNumber, comments, author, photoId }) => {
           }
         `
       })
-      console.log(newCacheComment);
       cache.modify({
         id: `Photo:${photoId}`,
         fields: {

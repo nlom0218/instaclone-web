@@ -8,6 +8,7 @@ const Button = styled.input`
     color: white;
     text-align: center;
     padding: 8px 0px;
+    width: 100%;
     font-weight: 600;
     cursor: pointer;
     opacity: ${props => props.disabled ? "0.4" : "1"};
