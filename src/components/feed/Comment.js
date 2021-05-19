@@ -57,7 +57,9 @@ const Comment = ({ author, payload, id, isMine, photoId }) => {
     deleteCommentMutation(id)
   }
   return (<CommentContainer>
-    <FatText>{author}</FatText>
+    <Link to={`/user/${author}`}>
+      <FatText>{author}</FatText>
+    </Link>
     <CommentCaption>
       {payload
         .split(" ")

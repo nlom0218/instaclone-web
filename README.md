@@ -5,7 +5,7 @@
 - [x] Arch
 - [x] Styles
 
-- [ ] Log In / Sign Up
-- [ ] Feed
+- [x] Log In / Sign Up
+- [x] Feed
 - [ ] Profile
 - [ ] See Hashtag
